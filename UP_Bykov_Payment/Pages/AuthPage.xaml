@@ -21,7 +21,7 @@
                 <TextBox x:Name="TextBoxLogin" MaxLength="50"
                          ToolTip="Введите логин"
                          TextChanged="TextBoxLogin_TextChanged"/>
-                <TextBlock x:Name="txtHintLogin" Text="Введите логин"
+                <TextBlock x:Name="txtHintLogin" ToolTip="{Binding ToolTip, ElementName=TextBoxLogin}" Text="Введите логин"
                            Foreground="Gray" Margin="6,0,0,0" VerticalAlignment="Center"
                            MouseLeftButtonUp="txtHintLogin_MouseLeftButtonUp"/>
             </Grid>
@@ -32,7 +32,7 @@
                 <PasswordBox x:Name="PasswordBox" MaxLength="50"
                              ToolTip="Введите пароль"
                              PasswordChanged="PasswordBox_PasswordChanged"/>
-                <TextBlock x:Name="txtHintPass" Text="Введите пароль"
+                <TextBlock x:Name="txtHintPass" ToolTip="{Binding ToolTip, ElementName=PasswordBox}" Text="Введите пароль"
                            Foreground="Gray" Margin="6,0,0,0" VerticalAlignment="Center"
                            MouseLeftButtonUp="txtHintPass_MouseLeftButtonUp"/>
             </Grid>

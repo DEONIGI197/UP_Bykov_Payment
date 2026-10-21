@@ -1,4 +1,4 @@
-﻿<Page x:Class="UP_Bykov_Payment.Pages.ChangePassPage"
+<Page x:Class="UP_Bykov_Payment.Pages.ChangePassPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -19,7 +19,7 @@
             <Grid>
                 <TextBox x:Name="TbLogin" MaxLength="50" ToolTip="Введите свой логин"
                          TextChanged="TbLogin_TextChanged"/>
-                <TextBlock x:Name="txtHintLogin" Text="Введите логин" Foreground="Gray"
+                <TextBlock x:Name="txtHintLogin" ToolTip="{Binding ToolTip, ElementName=TbLogin}" Text="Введите логин" Foreground="Gray"
                            Margin="6,0,0,0" VerticalAlignment="Center"
                            MouseLeftButtonUp="txtHintLogin_MouseLeftButtonUp"/>
             </Grid>
@@ -28,7 +28,7 @@
             <Grid>
                 <PasswordBox x:Name="CurrentPasswordBox" MaxLength="50" ToolTip="Введите пароль, который используете сейчас"
                              PasswordChanged="CurrentPasswordBox_PasswordChanged"/>
-                <TextBlock x:Name="txtHintCurrent" Text="Текущий пароль" Foreground="Gray"
+                <TextBlock x:Name="txtHintCurrent" ToolTip="{Binding ToolTip, ElementName=CurrentPasswordBox}" Text="Текущий пароль" Foreground="Gray"
                            Margin="6,0,0,0" VerticalAlignment="Center"
                            MouseLeftButtonUp="txtHintCurrent_MouseLeftButtonUp"/>
             </Grid>
@@ -38,7 +38,7 @@
                 <PasswordBox x:Name="NewPasswordBox" MaxLength="50"
                              ToolTip="Не менее 6 символов, только английские буквы и цифры, хотя бы одна цифра"
                              PasswordChanged="NewPasswordBox_PasswordChanged"/>
-                <TextBlock x:Name="txtHintNew" Text="Новый пароль" Foreground="Gray"
+                <TextBlock x:Name="txtHintNew" ToolTip="{Binding ToolTip, ElementName=NewPasswordBox}" Text="Новый пароль" Foreground="Gray"
                            Margin="6,0,0,0" VerticalAlignment="Center"
                            MouseLeftButtonUp="txtHintNew_MouseLeftButtonUp"/>
             </Grid>
@@ -47,7 +47,7 @@
             <Grid>
                 <PasswordBox x:Name="ConfirmPasswordBox" MaxLength="50" ToolTip="Повторите новый пароль"
                              PasswordChanged="ConfirmPasswordBox_PasswordChanged"/>
-                <TextBlock x:Name="txtHintConfirm" Text="Повторите новый пароль" Foreground="Gray"
+                <TextBlock x:Name="txtHintConfirm" ToolTip="{Binding ToolTip, ElementName=ConfirmPasswordBox}" Text="Повторите новый пароль" Foreground="Gray"
                            Margin="6,0,0,0" VerticalAlignment="Center"
                            MouseLeftButtonUp="txtHintConfirm_MouseLeftButtonUp"/>
             </Grid>

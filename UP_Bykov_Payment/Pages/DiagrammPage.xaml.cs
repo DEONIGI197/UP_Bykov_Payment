@@ -190,7 +190,9 @@ namespace UP_Bykov_Payment.Pages
                 // чтобы не мешал прошлый отчет, если он еще открыт
                 string folder = GetReportsFolder();
                 string fileName = "Payments_" + DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss") + ".xlsx";
-                workbook.SaveAs(System.IO.Path.Combine(folder, fileName));
+                // SaveCopyAs, потому что обычный SaveAs у Excel падает в папках OneDrive
+                workbook.SaveCopyAs(System.IO.Path.Combine(folder, fileName));
+                workbook.Saved = true;
 
                 // показываем таблицу
                 application.Visible = true;

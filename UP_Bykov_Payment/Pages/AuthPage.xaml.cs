@@ -42,46 +42,52 @@ namespace UP_Bykov_Payment.Pages
         {
             if (string.IsNullOrEmpty(TextBoxLogin.Text) || string.IsNullOrEmpty(PasswordBox.Password))
             {
-                MessageBox.Show("Введите логин или пароль");
+                Messages.Show("Введите логин или пароль");
                 return;
             }
 
-            string hashedPassword = GetHash(PasswordBox.Password);
+            var user = Authorization(TextBoxLogin.Text, PasswordBox.Password);
+
+            if (user == null)
+            {
+                Messages.Show("Пользователь с такими данными не найден!");
+                failedAttempts++;
+                if (failedAttempts >= 3)
+                {
+                    if (captcha.Visibility != Visibility.Visible)
+                    {
+                        CaptchaSwitch();
+                    }
+                    CaptchaChange();
+                }
+                return;
+            }
+            else
+            {
+                Messages.Show("Пользователь успешно найден!");
+
+                switch (user.Role)
+                {
+                    case "User":
+                        NavigationService?.Navigate(new UserPage());
+                        break;
+                    case "Admin":
+                        NavigationService?.Navigate(new AdminPage());
+                        break;
+                }
+            }
+        }
+
+        // аутентификация пользователя
+        private User Authorization(string login, string password)
+        {
+            string hashedPassword = GetHash(password);
 
             using (var db = new DB_Bykov_PaymentEntities())
             {
-                var user = db.User
+                return db.User
                     .AsNoTracking()
-                    .FirstOrDefault(u => u.Login == TextBoxLogin.Text && u.Password == hashedPassword);
-
-                if (user == null)
-                {
-                    MessageBox.Show("Пользователь с такими данными не найден!");
-                    failedAttempts++;
-                    if (failedAttempts >= 3)
-                    {
-                        if (captcha.Visibility != Visibility.Visible)
-                        {
-                            CaptchaSwitch();
-                        }
-                        CaptchaChange();
-                    }
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Пользователь успешно найден!");
-
-                    switch (user.Role)
-                    {
-                        case "User":
-                            NavigationService?.Navigate(new UserPage());
-                            break;
-                        case "Admin":
-                            NavigationService?.Navigate(new AdminPage());
-                            break;
-                    }
-                }
+                    .FirstOrDefault(u => u.Login == login && u.Password == hashedPassword);
             }
         }
 
@@ -152,17 +158,23 @@ namespace UP_Bykov_Payment.Pages
             captchaInput.Clear();
         }
 
+        // проверка капчи
+        private bool CheckCaptcha()
+        {
+            return captchaInput.Text == captcha.Text;
+        }
+
         // кнопка Подтвердить капчу
         private void submitCaptcha_Click(object sender, RoutedEventArgs e)
         {
-            if (captchaInput.Text != captcha.Text)
+            if (!CheckCaptcha())
             {
-                MessageBox.Show("Неверно введена капча", "Ошибка");
+                Messages.Show("Неверно введена капча", "Ошибка");
                 CaptchaChange();
             }
             else
             {
-                MessageBox.Show("Капча введена успешно, можете продолжить авторизацию", "Успех");
+                Messages.Show("Капча введена успешно, можете продолжить авторизацию", "Успех");
                 CaptchaSwitch();
                 failedAttempts = 0;
             }

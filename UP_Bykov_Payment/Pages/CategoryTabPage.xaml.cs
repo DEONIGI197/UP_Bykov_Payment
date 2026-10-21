@@ -47,23 +47,23 @@ namespace UP_Bykov_Payment.Pages
 
             if (categoryForRemoving.Count == 0)
             {
-                MessageBox.Show("Выберите записи для удаления!", "Внимание");
+                Messages.Show("Выберите записи для удаления!", "Внимание");
                 return;
             }
 
-            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {categoryForRemoving.Count()} элементов?\nВсе платежи этих категорий тоже будут удалены.",
+            if (Messages.Show($"Вы точно хотите удалить записи в количестве {categoryForRemoving.Count()} элементов?\nВсе платежи этих категорий тоже будут удалены.",
                 "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
                     DB_Bykov_PaymentEntities.GetContext().Category.RemoveRange(categoryForRemoving);
                     DB_Bykov_PaymentEntities.GetContext().SaveChanges();
-                    MessageBox.Show("Данные успешно удалены!");
+                    Messages.Show("Данные успешно удалены!");
                     DataGridCategory.ItemsSource = DB_Bykov_PaymentEntities.GetContext().Category.ToList();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message.ToString());
+                    Messages.Show(ex.Message.ToString());
                 }
             }
         }

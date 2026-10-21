@@ -86,7 +86,7 @@ namespace UP_Bykov_Payment.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Messages.Show(ex.Message);
             }
         }
     }

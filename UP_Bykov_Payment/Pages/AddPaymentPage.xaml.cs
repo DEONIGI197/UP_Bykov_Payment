@@ -83,7 +83,7 @@ namespace UP_Bykov_Payment.Pages
 
             if (errors.Length > 0)
             {
-                MessageBox.Show(errors.ToString(), "Ошибка");
+                Messages.Show(errors.ToString(), "Ошибка");
                 return;
             }
 
@@ -97,12 +97,12 @@ namespace UP_Bykov_Payment.Pages
             try
             {
                 DB_Bykov_PaymentEntities.GetContext().SaveChanges();
-                MessageBox.Show("Данные успешно сохранены!");
+                Messages.Show("Данные успешно сохранены!");
                 NavigationService?.GoBack();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString());
+                Messages.Show(ex.Message.ToString());
             }
         }
 

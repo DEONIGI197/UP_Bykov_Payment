@@ -91,7 +91,7 @@ namespace UP_Bykov_Payment
         // подтверждение выхода
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите выйти?", "Выход",
+            if (Messages.Show("Вы действительно хотите выйти?", "Выход",
                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                 e.Cancel = true;
             else

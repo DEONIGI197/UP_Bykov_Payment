@@ -44,7 +44,7 @@ namespace UP_Bykov_Payment.Pages
                 string.IsNullOrEmpty(ConfirmPasswordBox.Password) ||
                 string.IsNullOrEmpty(TbLogin.Text))
             {
-                MessageBox.Show("Все поля обязательны к заполнению!");
+                Messages.Show("Все поля обязательны к заполнению!");
                 return;
             }
 
@@ -56,7 +56,7 @@ namespace UP_Bykov_Payment.Pages
 
             if (user == null)
             {
-                MessageBox.Show("Текущий пароль/Логин неверный!");
+                Messages.Show("Текущий пароль/Логин неверный!");
                 return;
             }
 
@@ -76,32 +76,32 @@ namespace UP_Bykov_Payment.Pages
                 }
 
                 if (!en)
-                    MessageBox.Show("Используйте только английскую раскладку!");
+                    Messages.Show("Используйте только английскую раскладку!");
                 else if (!number)
-                    MessageBox.Show("Добавьте хотя бы одну цифру!");
+                    Messages.Show("Добавьте хотя бы одну цифру!");
 
                 if (en && number)
                 {
                     if (NewPasswordBox.Password != ConfirmPasswordBox.Password)
                     {
-                        MessageBox.Show("Пароли не совпадают!");
+                        Messages.Show("Пароли не совпадают!");
                     }
                     else if (NewPasswordBox.Password == CurrentPasswordBox.Password)
                     {
-                        MessageBox.Show("Новый пароль совпадает со старым!");
+                        Messages.Show("Новый пароль совпадает со старым!");
                     }
                     else
                     {
                         user.Password = GetHash(NewPasswordBox.Password);
                         DB_Bykov_PaymentEntities.GetContext().SaveChanges();
-                        MessageBox.Show("Пароль успешно изменен!");
+                        Messages.Show("Пароль успешно изменен!");
                         NavigationService?.GoBack();
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Пароль слишком короткий, должно быть минимум 6 символов!");
+                Messages.Show("Пароль слишком короткий, должно быть минимум 6 символов!");
             }
         }
 

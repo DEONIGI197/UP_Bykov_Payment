@@ -85,7 +85,7 @@ namespace UP_Bykov_Payment.Pages
                 var allUsers = _context.User.ToList().OrderBy(u => u.FIO).ToList();
                 if (allUsers.Count == 0)
                 {
-                    MessageBox.Show("Нет пользователей для выгрузки!");
+                    Messages.Show("Нет пользователей для выгрузки!");
                     return;
                 }
 
@@ -194,7 +194,7 @@ namespace UP_Bykov_Payment.Pages
                 // показываем таблицу
                 application.Visible = true;
 
-                MessageBox.Show("Отчет сохранен:\n" + System.IO.Path.Combine(folder, fileName), "Экспорт в Excel");
+                Messages.Show("Отчет сохранен:\n" + System.IO.Path.Combine(folder, fileName), "Экспорт в Excel");
             }
             catch (Exception ex)
             {
@@ -204,7 +204,7 @@ namespace UP_Bykov_Payment.Pages
                     application.DisplayAlerts = false;
                     application.Quit();
                 }
-                MessageBox.Show("Ошибка при выгрузке в Excel:\n" + ex.Message, "Ошибка");
+                Messages.Show("Ошибка при выгрузке в Excel:\n" + ex.Message, "Ошибка");
             }
         }
 
@@ -326,14 +326,14 @@ namespace UP_Bykov_Payment.Pages
                 document.SaveAs2(System.IO.Path.Combine(folder, fileName + ".docx"));
                 document.ExportAsFixedFormat(System.IO.Path.Combine(folder, fileName + ".pdf"), Word.WdExportFormat.wdExportFormatPDF);
 
-                MessageBox.Show("Отчет сохранен в папку:\n" + folder + "\n\n" + fileName + ".docx\n" + fileName + ".pdf", "Экспорт в Word");
+                Messages.Show("Отчет сохранен в папку:\n" + folder + "\n\n" + fileName + ".docx\n" + fileName + ".pdf", "Экспорт в Word");
             }
             catch (Exception ex)
             {
                 // закрываем Word
                 if (application != null && !application.Visible)
                     application.Quit(false);
-                MessageBox.Show("Ошибка при выгрузке в Word:\n" + ex.Message, "Ошибка");
+                Messages.Show("Ошибка при выгрузке в Word:\n" + ex.Message, "Ошибка");
             }
         }
     }

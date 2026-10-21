@@ -44,19 +44,19 @@ namespace UP_Bykov_Payment.Pages
             if (string.IsNullOrEmpty(txtbxLog.Text) || string.IsNullOrEmpty(txtbxFIO.Text) ||
                 string.IsNullOrEmpty(passBxFrst.Password) || string.IsNullOrEmpty(passBxScnd.Password))
             {
-                MessageBox.Show("Заполните все поля!");
+                Messages.Show("Заполните все поля!");
                 return;
             }
 
             // формат логина и ФИО
             if (!Regex.IsMatch(txtbxLog.Text, @"^[a-zA-Z0-9@._]+$"))
             {
-                MessageBox.Show("Логин может содержать только латинские буквы, цифры и символы @ . _");
+                Messages.Show("Логин может содержать только латинские буквы, цифры и символы @ . _");
                 return;
             }
             if (!Regex.IsMatch(txtbxFIO.Text.Trim(), @"^[а-яА-ЯёЁa-zA-Z\- ]+$"))
             {
-                MessageBox.Show("ФИО может содержать только буквы, пробелы и дефис!");
+                Messages.Show("ФИО может содержать только буквы, пробелы и дефис!");
                 return;
             }
 
@@ -69,7 +69,7 @@ namespace UP_Bykov_Payment.Pages
 
                 if (user != null)
                 {
-                    MessageBox.Show("Пользователь с таким логином уже существует!");
+                    Messages.Show("Пользователь с таким логином уже существует!");
                     return;
                 }
 
@@ -89,15 +89,15 @@ namespace UP_Bykov_Payment.Pages
                     }
 
                     if (!en)
-                        MessageBox.Show("Используйте только английскую раскладку!");
+                        Messages.Show("Используйте только английскую раскладку!");
                     else if (!number)
-                        MessageBox.Show("Добавьте хотя бы одну цифру!");
+                        Messages.Show("Добавьте хотя бы одну цифру!");
 
                     if (en && number)
                     {
                         if (passBxFrst.Password != passBxScnd.Password)
                         {
-                            MessageBox.Show("Пароли не совпадают!");
+                            Messages.Show("Пароли не совпадают!");
                         }
                         else
                         {
@@ -110,7 +110,7 @@ namespace UP_Bykov_Payment.Pages
                             };
                             db.User.Add(userObject);
                             db.SaveChanges();
-                            MessageBox.Show("Пользователь успешно зарегистрирован!");
+                            Messages.Show("Пользователь успешно зарегистрирован!");
                             txtbxLog.Clear();
                             passBxFrst.Clear();
                             passBxScnd.Clear();
@@ -122,7 +122,7 @@ namespace UP_Bykov_Payment.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Пароль слишком короткий, должно быть минимум 6 символов!");
+                    Messages.Show("Пароль слишком короткий, должно быть минимум 6 символов!");
                 }
             }
         }

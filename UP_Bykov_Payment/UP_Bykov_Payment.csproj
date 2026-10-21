@@ -166,6 +166,7 @@
       <DependentUpon>UsersTabPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entities.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>

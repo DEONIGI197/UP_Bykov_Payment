@@ -1,7 +1,6 @@
 namespace UP_Bykov_Payment
 {
-    // дописываем к контексту базы данных метод GetContext,
-    // отдельным файлом, чтобы он не стирался при обновлении модели
+    // подключение к базе данных
     public partial class DB_Bykov_PaymentEntities
     {
         private static DB_Bykov_PaymentEntities _context;

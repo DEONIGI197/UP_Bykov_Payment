@@ -45,7 +45,7 @@ namespace UP_Bykov_Payment.Pages
             NavigationService?.Navigate(new DiagrammPage());
         }
 
-        // администратору доступно всё, что и пользователю
+        // просмотр пользователей
         private void BtnUsers_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new UserPage());

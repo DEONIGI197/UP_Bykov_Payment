@@ -57,7 +57,7 @@ namespace UP_Bykov_Payment.Pages
                 errors.AppendLine("Укажите пароль!");
             else if (_currentUser.Password != _oldPassword)
             {
-                // пароль новый или изменен - проверяем его как при регистрации
+                // проверка пароля
                 if (_currentUser.Password.Length < 6)
                     errors.AppendLine("Пароль должен быть не короче 6 символов!");
                 if (!Regex.IsMatch(_currentUser.Password, @"^[a-zA-Z0-9]+$"))
@@ -80,7 +80,7 @@ namespace UP_Bykov_Payment.Pages
                 return;
             }
 
-            // хэшируем пароль, только если его поменяли
+            // хэшируем новый пароль
             if (_currentUser.Password != _oldPassword)
                 _currentUser.Password = RegPage.GetHash(_currentUser.Password);
 

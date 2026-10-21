@@ -46,7 +46,6 @@
                     SelectedDate="{Binding Date}"
                     ToolTip="Дата платежа (не позже сегодняшнего дня)">
             <DatePicker.Resources>
-                <!-- чтобы общий стиль кнопок не растягивал кнопку календаря -->
                 <Style TargetType="Button"/>
             </DatePicker.Resources>
         </DatePicker>

@@ -24,14 +24,14 @@ namespace UP_Bykov_Payment
         {
             InitializeComponent();
 
-            // загружаем тему, которая была выбрана в прошлый раз
+            // загружаем сохраненную тему
             ChangeTheme(Properties.Settings.Default.Theme);
 
             // первая страница - авторизация
             MainFrame.Navigate(new Pages.AuthPage());
         }
 
-        // после перехода меняем заголовок окна и показываем/прячем кнопку Назад
+        // заголовок окна и кнопка Назад
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
             if (e.Content is Page page)
@@ -67,7 +67,7 @@ namespace UP_Bykov_Payment
 
             ChangeTheme(Properties.Settings.Default.Theme);
 
-            // сохраняем выбор, чтобы тема осталась после выхода
+            // сохраняем тему
             Properties.Settings.Default.Save();
         }
 

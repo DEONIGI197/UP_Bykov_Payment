@@ -42,12 +42,11 @@ namespace UP_Bykov_Payment.Pages
             CmbUser.ItemsSource = _context.User.ToList();
             CmbDiagram.ItemsSource = Enum.GetValues(typeof(SeriesChartType));
 
-            // чтобы диаграмма сразу была видна
             CmbDiagram.SelectedItem = SeriesChartType.Column;
             CmbUser.SelectedIndex = 0;
         }
 
-        // перестраиваем диаграмму при смене пользователя или типа
+        // обновление диаграммы
         private void UpdateChart(object sender, SelectionChangedEventArgs e)
         {
             if (CmbUser.SelectedItem is User currentUser &&
@@ -68,7 +67,7 @@ namespace UP_Bykov_Payment.Pages
             }
         }
 
-        // папка для отчетов рядом с программой (создается, если ее нет)
+        // папка для отчетов
         private string GetReportsFolder()
         {
             string folder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Отчеты");
@@ -102,11 +101,11 @@ namespace UP_Bykov_Payment.Pages
                 {
                     int startRowIndex = 1;
                     Excel.Worksheet worksheet = application.Worksheets.Item[i + 1];
-                    // имя листа в Excel не длиннее 31 символа
+                    // имя листа
                     string sheetName = allUsers[i].FIO;
                     if (sheetName.Length > 27)
                         sheetName = sheetName.Substring(0, 27);
-                    // два листа с одинаковым именем нельзя - добавляем номер
+                    // если такое имя уже есть
                     if (usedNames.Contains(sheetName))
                         sheetName = sheetName + " (" + (i + 1) + ")";
                     usedNames.Add(sheetName);
@@ -175,7 +174,7 @@ namespace UP_Bykov_Payment.Pages
                     worksheet.Columns.AutoFit();
                 }
 
-                // лист "Общий итог" после всех пользователей
+                // лист "Общий итог"
                 Excel.Worksheet summarySheet = workbook.Worksheets.Add(After: workbook.Worksheets[workbook.Worksheets.Count]);
                 summarySheet.Name = "Общий итог";
                 summarySheet.Cells[1, 1] = "Общий итог:";
@@ -186,11 +185,9 @@ namespace UP_Bykov_Payment.Pages
                 summaryRange.Font.Bold = true;
                 summarySheet.Columns.AutoFit();
 
-                // сохраняем в папку "Отчеты" рядом с программой, в имени файла дата и время,
-                // чтобы не мешал прошлый отчет, если он еще открыт
+                // сохраняем отчет
                 string folder = GetReportsFolder();
                 string fileName = "Payments_" + DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss") + ".xlsx";
-                // SaveCopyAs, потому что обычный SaveAs у Excel падает в папках OneDrive
                 workbook.SaveCopyAs(System.IO.Path.Combine(folder, fileName));
                 workbook.Saved = true;
 
@@ -201,7 +198,7 @@ namespace UP_Bykov_Payment.Pages
             }
             catch (Exception ex)
             {
-                // закрываем невидимый Excel, чтобы он не остался висеть в памяти
+                // закрываем Excel
                 if (application != null && !application.Visible)
                 {
                     application.DisplayAlerts = false;
@@ -323,7 +320,7 @@ namespace UP_Bykov_Payment.Pages
                 // показываем документ
                 application.Visible = true;
 
-                // сохраняем в .docx и .pdf в папку "Отчеты", в имени файла дата и время
+                // сохраняем в docx и pdf
                 string folder = GetReportsFolder();
                 string fileName = "Payments_" + DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss");
                 document.SaveAs2(System.IO.Path.Combine(folder, fileName + ".docx"));
@@ -333,7 +330,7 @@ namespace UP_Bykov_Payment.Pages
             }
             catch (Exception ex)
             {
-                // закрываем невидимый Word, чтобы он не остался висеть в памяти
+                // закрываем Word
                 if (application != null && !application.Visible)
                     application.Quit(false);
                 MessageBox.Show("Ошибка при выгрузке в Word:\n" + ex.Message, "Ошибка");

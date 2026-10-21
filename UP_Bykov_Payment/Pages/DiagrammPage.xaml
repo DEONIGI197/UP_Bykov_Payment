@@ -1,0 +1,47 @@
+﻿<Page x:Class="UP_Bykov_Payment.Pages.DiagrammPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:UP_Bykov_Payment.Pages"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Диаграммы">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- выбор пользователя, типа диаграммы и кнопки экспорта -->
+        <WrapPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,5,0,5">
+            <TextBlock Text="Пользователь:" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <ComboBox x:Name="CmbUser" Width="220" DisplayMemberPath="FIO"
+                      ToolTip="Выберите пользователя"
+                      SelectionChanged="UpdateChart"/>
+
+            <TextBlock Text="Тип диаграммы:" VerticalAlignment="Center" Margin="15,0,5,0"/>
+            <ComboBox x:Name="CmbDiagram" Width="160"
+                      ToolTip="Выберите тип диаграммы"
+                      SelectionChanged="UpdateChart"/>
+
+            <Button x:Name="BtnExcel" Content="Экспорт в Excel" Margin="15,0,0,0"
+                    ToolTip="Выгрузить платежи всех пользователей в Excel"
+                    Click="BtnExcel_Click"/>
+            <Button x:Name="BtnWord" Content="Экспорт в Word" Margin="5,0,0,0"
+                    ToolTip="Выгрузить платежи всех пользователей в Word и PDF"
+                    Click="BtnWord_Click"/>
+        </WrapPanel>
+
+        <!-- диаграмма -->
+        <WindowsFormsHost Grid.Row="1" Margin="5">
+            <charts:Chart x:Name="ChartPayments">
+                <charts:Chart.Legends>
+                    <charts:Legend/>
+                </charts:Chart.Legends>
+            </charts:Chart>
+        </WindowsFormsHost>
+    </Grid>
+</Page>

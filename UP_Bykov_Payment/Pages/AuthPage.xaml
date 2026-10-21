@@ -1,0 +1,68 @@
+<Page x:Class="UP_Bykov_Payment.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:UP_Bykov_Payment.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Авторизация">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+
+            <TextBlock Text="Вход в систему" FontSize="22" FontWeight="Bold"
+                       HorizontalAlignment="Center" Margin="0,0,0,15"
+                       Foreground="{DynamicResource PanelBackground}"/>
+
+            <!-- логин -->
+            <Label x:Name="labelLogin" Content="Логин"/>
+            <Grid>
+                <TextBox x:Name="TextBoxLogin" MaxLength="50"
+                         ToolTip="Введите логин"
+                         TextChanged="TextBoxLogin_TextChanged"/>
+                <TextBlock x:Name="txtHintLogin" Text="Введите логин"
+                           Foreground="Gray" Margin="6,0,0,0" VerticalAlignment="Center"
+                           MouseLeftButtonUp="txtHintLogin_MouseLeftButtonUp"/>
+            </Grid>
+
+            <!-- пароль -->
+            <Label x:Name="labelPass" Content="Пароль"/>
+            <Grid>
+                <PasswordBox x:Name="PasswordBox" MaxLength="50"
+                             ToolTip="Введите пароль"
+                             PasswordChanged="PasswordBox_PasswordChanged"/>
+                <TextBlock x:Name="txtHintPass" Text="Введите пароль"
+                           Foreground="Gray" Margin="6,0,0,0" VerticalAlignment="Center"
+                           MouseLeftButtonUp="txtHintPass_MouseLeftButtonUp"/>
+            </Grid>
+
+            <!-- капча (появляется после 3 неверных попыток) -->
+            <Label x:Name="labelCaptcha" Content="Капча:" Visibility="Collapsed"/>
+            <TextBox x:Name="captcha" Visibility="Collapsed"
+                     Height="42" Width="156"
+                     Foreground="Red" FontStyle="Italic" FontWeight="Heavy" FontSize="20"
+                     FontStretch="UltraCondensed"
+                     Background="{x:Null}" IsReadOnly="True"
+                     HorizontalContentAlignment="Center"
+                     ContextMenu="{x:Null}"
+                     CommandManager.PreviewExecuted="textBox_PreviewExecuted"
+                     ToolTip="Введите символы с картинки"/>
+            <TextBox x:Name="captchaInput" Visibility="Collapsed" MaxLength="6"
+                     Margin="0,10,0,0"
+                     ToolTip="Введите капчу, учитывая регистр букв"/>
+            <Button x:Name="submitCaptcha" Content="Подтвердить" Visibility="Collapsed"
+                    Margin="0,15,0,5"
+                    ToolTip="Подтвердить ввод капчи" Click="submitCaptcha_Click"/>
+
+            <!-- кнопки -->
+            <Button x:Name="ButtonEnter" Content="Вход" Margin="0,20,0,5"
+                    ToolTip="Кнопка входа" Click="ButtonEnter_OnClick"/>
+            <Button x:Name="ButtonReg" Content="Регистрация"
+                    ToolTip="Кнопка регистрации" Click="ButtonReg_Click"/>
+            <Button x:Name="ButtonChangePassword" Content="Смена пароля"
+                    ToolTip="Кнопка смены пароля" Click="ButtonChangePassword_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

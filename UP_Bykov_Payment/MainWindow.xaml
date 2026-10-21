@@ -1,0 +1,38 @@
+﻿<Window x:Class="UP_Bykov_Payment.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UP_Bykov_Payment"
+        mc:Ignorable="d"
+        Title="Учёт платежей" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MainBackground}"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+
+        <!-- верхняя и нижняя полосы -->
+        <Border Grid.Row="0" Background="{DynamicResource PanelBackground}"/>
+        <Border Grid.Row="2" Background="{DynamicResource PanelBackground}"/>
+
+        <Button x:Name="BtnBack" Content="Назад" Grid.Row="0"
+                HorizontalAlignment="Left"
+                ToolTip="Вернуться назад" Click="BtnBack_Click"/>
+
+        <Button x:Name="BtnTheme" Content="Сменить тему" Grid.Row="0"
+                HorizontalAlignment="Right"
+                ToolTip="Переключить оформление приложения" Click="BtnTheme_Click"/>
+
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"
+               Navigated="MainFrame_Navigated"/>
+
+        <TextBlock x:Name="DateTimeNow" Grid.Row="2"
+                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Margin="0,0,15,0" Foreground="{DynamicResource PanelForeground}"/>
+    </Grid>
+</Window>
